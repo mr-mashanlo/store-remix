@@ -1,10 +1,15 @@
-import '@/shared/styles/tailwind.css';
-import '@/shared/styles/global.sass';
+import '@/app/styles/tailwind.css';
+import '@/app/styles/global.sass';
 
 import type { LinksFunction } from '@remix-run/node';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 
 export const links: LinksFunction = () => [
+  {
+    rel: 'icon',
+    type: 'image/svg+xml',
+    href: '/favicon.svg'
+  },
   {
     rel: 'preconnect',
     href: 'https://fonts.googleapis.com'
@@ -29,7 +34,7 @@ export function Layout( { children }: { children: React.ReactNode } ) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="text-sm">
         {children}
         <ScrollRestoration />
         <Scripts />

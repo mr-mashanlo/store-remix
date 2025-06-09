@@ -5,14 +5,22 @@ interface ExtendedError extends Error {
 }
 
 export const defaultInstance = ky.create( {
-  retry: 1,
-  prefixUrl: import.meta.env.VITE_REACT_APP_BACK_URL,
+  prefixUrl: 'http://localhost:3000/api',
   credentials: 'include',
-  hooks: {
-    beforeRequest: [
-      request => { request.headers.set( 'content-type', 'application/json' ); }
-    ]
+  headers: { 'Content-Type': 'application/json' },
+  retry: {
+    limit: 1,
+    statusCodes: [ 419 ],
+    methods: [ 'get', 'post', 'put', 'delete' ]
   }
+  // hooks: {
+  //   beforeRequest: [
+  //     request => {
+  //       request.headers.set( 'Content-Type', 'application/json' );
+  //       request.headers.set( 'Cookie', request.headers.get( 'Cookie' ) || '' );
+  //     }
+  //   ]
+  // }
 } );
 
 export const authInstance = defaultInstance.extend( {
