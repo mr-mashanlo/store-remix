@@ -66,7 +66,7 @@ export default function Signin() {
           {actionData?.errors?.password ? <p id="password-error" role="alert" className="mt-2 text-xs text-center text-red-400">{actionData?.errors.password.join( ', ' )}</p> : null }
         </div>
         <div className="mt-2 text-xs text-right">
-          <Link to="/" title="Go to reset password page" className="text-[#C2C3CB] hover:text-black">Forget password?</Link>
+          <Link to="/reset" title="Go to reset password page" className="text-[#C2C3CB] hover:text-black">Forget password?</Link>
         </div>
         <button title="Sign in" className="w-full mt-5 p-3.5 rounded-xl bg-black text-white cursor-pointer">Sign in</button>
       </fieldset>
