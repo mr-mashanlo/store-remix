@@ -5,13 +5,13 @@ import { HTTPError } from 'ky';
 import { twMerge } from 'tailwind-merge';
 import { ZodError } from 'zod';
 
-import { signIn } from '@/entities/auth';
+import { signUp } from '@/entities/auth';
 import { validateAuthFormData } from '@/shared/model/validator/auth-form';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Sign in to your account' },
-    { name: 'description', content: 'Access your dashboard to manage orders, subscriptions, and settings' }
+    { title: 'Create an account' },
+    { name: 'description', content: 'Sign up in under a minute and get instant access to all features' }
   ];
 };
 
@@ -24,7 +24,7 @@ export async function action( { request }: ActionFunctionArgs ) {
   try {
     const form = await request.formData();
     const body = validateAuthFormData( { email: form.get( 'email' ), password: form.get( 'password' ) } );
-    const response = await signIn( request, body );
+    const response = await signUp( request, body );
     return redirect( '/', { headers: { 'Set-Cookie': response.headers.get( 'set-cookie' ) || '' } } );
   } catch ( error ) {
     if ( error instanceof ZodError ) {
@@ -38,12 +38,12 @@ export async function action( { request }: ActionFunctionArgs ) {
   }
 }
 
-export default function Signin() {
+export default function Signup() {
   const actionData = useActionData<typeof action>();
   return (
     <Form method="post" aria-describedby="form-error" className="w-full sm:w-80">
       <fieldset>
-        <legend className="text-2xl text-center font-bold">Sign in</legend>
+        <legend className="text-2xl text-center font-bold">Sign up</legend>
         <div className="mt-8">
           <div className="relative">
             <input id="email" name="email" type="email" placeholder="name@company.com" aria-describedby="email-error" className={twMerge( 'peer w-full p-3.5 pl-11 rounded-xl bg-[#f5f5f5] placeholder:text-[#C2C3CB]', actionData?.errors?.email || actionData?.errors?.auth ? 'bg-red-100' : null )} required />
@@ -68,10 +68,10 @@ export default function Signin() {
         <div className="mt-2 text-xs text-right">
           <Link to="/" title="Go to reset password page" className="text-[#C2C3CB] hover:text-black">Forget password?</Link>
         </div>
-        <button title="Sign in" className="w-full mt-5 p-3.5 rounded-xl bg-black text-white cursor-pointer">Sign in</button>
+        <button title="Sign in" className="w-full mt-5 p-3.5 rounded-xl bg-black text-white cursor-pointer">Sign up</button>
       </fieldset>
       {actionData?.errors?.auth ? <p id="form-error" role="alert" className="mt-5 text-xs text-center text-red-400">{actionData?.errors.auth}</p> : null}
-      <p className="mt-5 text-center leading-6">Don&apos;t have an account? <Link to="/signup" title="Go to register page" className="font-bold hover:underline">Register</Link></p>
+      <p className="mt-5 text-center leading-6">Already have an account? <Link to="/signin" title="Go to register page" className="font-bold hover:underline">Log in</Link></p>
     </Form>
   );
 }
