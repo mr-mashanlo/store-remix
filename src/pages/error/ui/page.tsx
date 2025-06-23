@@ -14,11 +14,14 @@ const ErrorBoundary: FC = () => {
         </Link>
       </header>
       <section className="min-h-screen flex items-center justify-center">
-        <h1>{error.status}</h1>
-        <p>{error.data.errors.message}</p>
+        <div>
+          <h1>Error {error.status}</h1>
+          <p>{error.data?.errors?.message}</p>
+        </div>
       </section>
     </main>
   );
+
 };
 
 export default ErrorBoundary;

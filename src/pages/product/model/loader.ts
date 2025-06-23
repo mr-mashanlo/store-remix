@@ -1,12 +1,12 @@
-import { data } from '@remix-run/node';
+import { data, LoaderFunctionArgs } from '@remix-run/node';
 import { ZodError } from 'zod';
 
-import { getProducts, validateProductsData } from '@/entities/product';
+import { getProduct, validateProductData } from '@/entities/product';
 
-const loader = async () => {
+const loader = async ( { params }: LoaderFunctionArgs ) => {
   try {
-    const response = await getProducts();
-    const result = validateProductsData( response );
+    const response = await getProduct( params.id || '' );
+    const result = validateProductData( response );
     return data( result );
   } catch ( error ) {
     if ( error instanceof ZodError ) {

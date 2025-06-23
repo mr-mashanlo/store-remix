@@ -3,18 +3,18 @@ import { FC } from 'react';
 
 import loader from '../model/loader';
 
-const Home: FC = () => {
+const Feed: FC = () => {
   const data = useLoaderData<typeof loader>();
 
   return (
     <section className="p-3 sm:px-35 py-15">
-      <h1 className="mb-15 text-center font-medium">Our latest products</h1>
+      <h1 className="mb-15 text-center font-medium">{data.categories.docs[0].name}</h1>
       <ul className="grid sm:grid-cols-2 gap-10">
-        {data?.docs.map( product => (
+        {data?.products.docs.map( product => (
           <li key={product.id}>
             <article className="relative">
               <a href={`/product/${product.id}`}>
-                <img src={product.images[0].url} alt={product.images[0].alt} className="aspect-[4/3] object-cover bg-neutral-100" />
+                <img src={product.images[0].url} alt={product.images[0].alt} className="w-full aspect-[4/3] object-cover bg-neutral-100" />
               </a>
               <h2 className="font-medium absolute left-5 bottom-5">{product.name}</h2>
               {
@@ -32,4 +32,4 @@ const Home: FC = () => {
   );
 };
 
-export default Home;
+export default Feed;

@@ -3,6 +3,9 @@ import '@/app/styles/global.sass';
 
 import type { LinksFunction } from '@remix-run/node';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
+import { ReactNode } from 'react';
+
+import { ErrorBoundary } from '@/pages/error';
 
 export const links: LinksFunction = () => [
   {
@@ -25,7 +28,7 @@ export const links: LinksFunction = () => [
   }
 ];
 
-export function Layout( { children }: { children: React.ReactNode } ) {
+export function Layout( { children }: { children: ReactNode } ) {
   return (
     <html lang="en">
       <head>
@@ -46,3 +49,5 @@ export function Layout( { children }: { children: React.ReactNode } ) {
 export default function App() {
   return <Outlet />;
 }
+
+export { ErrorBoundary };

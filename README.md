@@ -1,25 +1,26 @@
-# Welcome to Remix!
+# E-commerce Store (Remix.js)
 
-- 📖 [Remix docs](https://remix.run/docs)
+Minimalist e-commerce web application built with [Remix.js](https://remix.run).
 
-## Development
+The project is currently under active development.
 
-Run the dev server:
+Design is intentionally clean and minimal — crafted by me to focus on usability and performance.
 
-```sh
-npm run dev
-```
+## Features (planned)
 
-## Deployment
+- Product listings with filtering
+- Product pages with dynamic routing
+- Shopping cart
+- User authentication
+- Admin dashboard (optional)
 
-First, build your app for production:
+## Stack
 
-```sh
-npm run build
-```
+- [Remix.js](https://remix.run)
+- TypeScript
+- Payload CMS (headless backend)
+- MongoDB
 
-Then run the app in production mode:
+---
 
-```sh
-npm start
-```
+> This project is a work in progress. Contributions and feedback are welcome.
