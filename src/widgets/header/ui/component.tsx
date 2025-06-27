@@ -19,7 +19,6 @@ const Header: FC = () => {
         <nav aria-label="Header navigation" className="flex items-center justify-end gap-7">
           <ul className="flex items-center gap-10">
             <li><NavLink to="/about">Account</NavLink></li>
-            <li><NavLink to="/cart">Cart (0)</NavLink></li>
           </ul>
         </nav>
       </div>

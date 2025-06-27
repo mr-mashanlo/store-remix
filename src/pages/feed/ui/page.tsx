@@ -4,13 +4,13 @@ import { FC } from 'react';
 import loader from '../model/loader';
 
 const Feed: FC = () => {
-  const data = useLoaderData<typeof loader>();
+  const loaderData = useLoaderData<typeof loader>();
 
   return (
-    <section className="p-3 sm:px-35 py-15">
-      <h1 className="mb-15 text-center font-medium">{data.categories.docs[0].name}</h1>
-      <ul className="grid sm:grid-cols-2 gap-10">
-        {data?.products.docs.map( product => (
+    <section className="p-3 sm:px-35 py-5 sm:py-15">
+      <h1 className="mb-10 sm:mb-15 text-center font-medium">{loaderData.categories.docs[0].name}</h1>
+      <ul className="grid sm:grid-cols-2 gap-3 sm:gap-10">
+        {loaderData?.products.docs.map( product => (
           <li key={product.id}>
             <article className="relative">
               <a href={`/product/${product.id}`}>
