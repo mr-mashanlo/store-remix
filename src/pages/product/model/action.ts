@@ -2,10 +2,20 @@ import { ActionFunctionArgs, data } from '@remix-run/node';
 import { HTTPError } from 'ky';
 import { ZodError } from 'zod';
 
+import { OptionsType } from '@/entities/cart';
+import { cartCookie } from '@/entities/cart/api/cookie.server';
+
+import { constructCartData } from '../lib/construct-cart-data';
+
 const action = async ( { request }: ActionFunctionArgs ) => {
   try {
     const form = await request.formData();
-    return data( { variant: form.get( 'variant' ) } );
+    const optionID = form.get( 'option' );
+    const cookies = request.headers.get( 'Cookie' );
+    const cookie = ( await cartCookie.parse( cookies ) ) || {};
+    const cart: OptionsType = cookie.cart || [];
+    const updatedCookie = await cartCookie.serialize( { ...cookie, cart: constructCartData( cart, String( optionID ) ) } );
+    return data( { option: form.get( 'option' ) }, { headers: { 'Set-Cookie': updatedCookie } } );
   } catch ( error ) {
     if ( error instanceof ZodError ) {
       throw data( { errors: { ...error.flatten().fieldErrors } }, { status: 400 } );

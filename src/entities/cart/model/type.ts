@@ -1,5 +1,5 @@
 import z from 'zod';
 
-import { VariantsSchema } from './schema';
+import { CartsDTO } from './schema';
 
-export type VariantsType = z.infer<typeof VariantsSchema>;
+export type CartsDTO = z.infer<typeof CartsDTO>;

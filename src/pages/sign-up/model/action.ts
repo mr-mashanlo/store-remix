@@ -3,7 +3,7 @@ import { HTTPError } from 'ky';
 import { ZodError } from 'zod';
 
 import { signUp } from '@/entities/auth';
-import { validateAuthFormData } from '@/shared/model';
+import { validateAuthFormData } from '@/shared/model/schemas';
 
 const action = async ( { request }: ActionFunctionArgs ) => {
   try {

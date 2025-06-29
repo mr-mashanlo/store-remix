@@ -1,6 +1,6 @@
 import { ProductType } from '@/entities/product';
 
-export function getVariantSearchParam( searchParams: URLSearchParams, data: ProductType ) {
-  const selectedVariantID = searchParams.get( 'variant' );
-  return data.variants.find( variant => variant.id === selectedVariantID );
+export function getOptionSearchParam( searchParams: URLSearchParams, data: ProductType ) {
+  const selectedOptionID = searchParams.get( 'option' );
+  return data.options.find( option => option.id === selectedOptionID );
 }

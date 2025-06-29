@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { SuccessDTO } from '@/shared/model';
+import { SuccessDTO } from '@/shared/model/schemas';
 
 export const CategorySchema = z.object( {
   id: z.string(),

@@ -1,3 +1,6 @@
-import useCartStore from './model/store';
+import { CartsDTO } from './model/type';
+import { validateCartOptionsData } from './model/validator';
 
-export { useCartStore };
+export { validateCartOptionsData };
+
+export type { CartsDTO };
