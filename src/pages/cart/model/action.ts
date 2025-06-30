@@ -2,19 +2,29 @@ import { ActionFunctionArgs, data } from '@remix-run/node';
 import { HTTPError } from 'ky';
 import { ZodError } from 'zod';
 
-import { CartsDTO } from '@/entities/cart';
 import { cartCookie } from '@/entities/cart/api/cookie.server';
 
-import { addToCart } from '../lib/add-to-cart';
+import { decreaseItem } from '../lib/decrease-item';
+import { increaseItem } from '../lib/increase-item';
 
 const action = async ( { request }: ActionFunctionArgs ) => {
   try {
     const form = await request.formData();
+    const action = form.get( 'action' );
     const optionID = form.get( 'option' );
+
     const cookies = request.headers.get( 'Cookie' );
     const cookie = ( await cartCookie.parse( cookies ) ) || {};
-    const cart: CartsDTO = cookie.cart || [];
-    const updatedCookie = await cartCookie.serialize( { ...cookie, cart: addToCart( cart, String( optionID ) ) } );
+    const cart = cookie.cart || [];
+
+    let updatedCookie = '';
+
+    if ( action === 'increment' ) {
+      updatedCookie = await cartCookie.serialize( { ...cookie, cart: increaseItem( cart, String( optionID ) ) } );
+    } else if ( action === 'decrement' ) {
+      updatedCookie = await cartCookie.serialize( { ...cookie, cart: decreaseItem( cart, String( optionID ) ) } );
+    }
+
     return data( {}, { headers: { 'Set-Cookie': updatedCookie } } );
   } catch ( error ) {
     if ( error instanceof ZodError ) {

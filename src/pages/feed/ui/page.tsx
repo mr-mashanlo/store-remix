@@ -19,10 +19,8 @@ const Feed: FC = () => {
               <h2 className="font-medium absolute left-5 bottom-5">{product.name}</h2>
               {
                 product.options.length > 1
-                  ?
-                  <p className="font-medium absolute right-5 bottom-5">{product.options.length} options from ${product.options[0].price}</p>
-                  :
-                  <p className="font-medium absolute right-5 bottom-5">${product.options[0].price}</p>
+                  ? <p className="font-medium absolute right-5 bottom-5">{product.options.length} options from ${product.options[0].price}</p>
+                  : <p className="font-medium absolute right-5 bottom-5">${product.options[0].price}</p>
               }
             </article>
           </li>

@@ -16,11 +16,11 @@ const Home: FC = () => {
               <Link to={`/product/${product.id}`}>
                 <img src={product.images[0].url} alt={product.images[0].alt} className="aspect-[4/3] object-cover bg-neutral-100" />
               </Link>
-              <h2 className="absolute left-5 bottom-5">{product.name}</h2>
+              <h2 className="font-medium absolute left-5 bottom-5">{product.name}</h2>
               {
                 product.options.length > 1
-                  ? <p className="absolute right-5 bottom-5">{product.options.length} options from ${product.options[0].price}</p>
-                  : <p className="absolute right-5 bottom-5">${product.options[0].price}</p>
+                  ? <p className="font-medium absolute right-5 bottom-5">{product.options.length} options from ${product.options[0].price}</p>
+                  : <p className="font-medium absolute right-5 bottom-5">${product.options[0].price}</p>
               }
             </article>
           </li>
