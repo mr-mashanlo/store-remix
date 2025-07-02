@@ -1,6 +1,6 @@
 import z from 'zod';
 
-export const ErrorDTO = z.object( {
+export const Error = z.object( {
   errors: z.array( z.object( {
     message: z.string()
   } ) )

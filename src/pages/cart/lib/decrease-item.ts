@@ -1,10 +1,10 @@
-import { CartsDTO } from '@/entities/cart';
+import { IQOrders } from '@/entities/cart';
 
-export const decreaseItem = ( cart: CartsDTO, optionID: string ) => {
-  const quantity = cart.find( option => option.id === optionID )?.quantity || 0;
+export const decreaseItem = ( orders: IQOrders, id: string ) => {
+  const quantity = orders.find( order => order.option === id )?.quantity || 0;
   if ( quantity > 1 ) {
-    return [ ...cart ].map( option => option.id === optionID ? { ...option, quantity: option.quantity - 1 } : option );
+    return [ ...orders ].map( order => order.option === id ? { ...order, quantity: order.quantity - 1 } : order );
   } else {
-    return [ ...cart ].filter( option => option.id !== optionID );
+    return [ ...orders ].filter( order => order.option !== id );
   }
 };

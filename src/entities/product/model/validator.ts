@@ -1,9 +1,13 @@
-import { ProductSchema, ProductsSchema } from './schema';
+import z from 'zod';
+
+import { Success } from '@/shared/schema';
+
+import { Product } from './schema';
 
 export const validateProductData = ( data: unknown ) => {
-  return ProductSchema.parse( data );
+  return Product.parse( data );
 };
 
 export const validateProductsData = ( data: unknown ) => {
-  return ProductsSchema.parse( data );
+  return Success.extend( { docs: z.array( Product ) } ).parse( data );
 };

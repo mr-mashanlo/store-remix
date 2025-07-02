@@ -12,8 +12,9 @@ const Footer: FC = () => {
         </div>
         <nav aria-label="Footer navigation">
           <ul className="flex flex-col sm:flex-row sm:items-center justify-center gap-4 sm:gap-10">
-            <li><Link to="/post/terms">Terms and Conditions</Link></li>
-            <li><Link to="/post/privacy">Privacy</Link></li>
+            <li><Link to="/">Search order</Link></li>
+            <li><Link to="/">Terms</Link></li>
+            <li><Link to="/">Privacy</Link></li>
           </ul>
         </nav>
       </div>

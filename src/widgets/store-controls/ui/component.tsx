@@ -6,15 +6,17 @@ const StoreControls: FC = () => {
   const [ isOpen, setIsOpen ] = useState( false );
   const [ searchParams, setSearchParams ] = useSearchParams();
   const search = searchParams.get( 'search' );
+  const color = searchParams.get( 'color' );
 
-  const handleSearchInputChange = ( e: ChangeEvent<HTMLInputElement> ) => {
+  const handleInputChange = ( e: ChangeEvent<HTMLInputElement> ) => {
     const params = new URLSearchParams( searchParams );
     const value = e.target.value.trim();
+    const name = e.target.name;
 
     if ( value.length ) {
-      params.set( 'search', value );
+      params.set( name, value );
     } else {
-      params.delete( 'search' );
+      params.delete( name );
     }
 
     setSearchParams( params, { replace: true, preventScrollReset: true } );
@@ -43,9 +45,12 @@ const StoreControls: FC = () => {
         <div className="w-screen inset-0 fixed flex items-end justify-center">
           <DialogPanel className="w-screen p-10 sm:px-35 bg-neutral-50 duration-300 data-closed:translate-y-25" transition>
             <Form>
-              <fieldset>
-                <label htmlFor="search" className="block">
-                  <input onChange={handleSearchInputChange} defaultValue={search || ''} id="search" name="search" type="text" placeholder="Cardholder 001" className="peer w-full p-3.5 rounded-xl bg-[#f5f5f5] placeholder:text-[#C2C3CB]" />
+              <fieldset className="grid grid-cols-3 gap-5">
+                <label htmlFor="search" className="block col-span-2">
+                  <input onChange={handleInputChange} defaultValue={search || ''} id="search" name="search" type="text" placeholder="Cardholder 001" className="peer w-full p-3.5 rounded-xl bg-[#f5f5f5] placeholder:text-[#C2C3CB]" />
+                </label>
+                <label htmlFor="color" className="block">
+                  <input onChange={handleInputChange} defaultValue={color || ''} id="color" name="color" type="text" placeholder="Black" className="peer w-full p-3.5 rounded-xl bg-[#f5f5f5] placeholder:text-[#C2C3CB]" />
                 </label>
               </fieldset>
             </Form>

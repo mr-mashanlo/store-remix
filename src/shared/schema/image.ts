@@ -1,6 +1,6 @@
 import z from 'zod';
 
-export const ImageSchema = z.object( {
+export const Image = z.object( {
   id: z.string(),
   url: z.string(),
   alt: z.string()

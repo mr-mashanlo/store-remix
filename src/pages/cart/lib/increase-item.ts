@@ -1,5 +1,5 @@
-import { CartsDTO } from '@/entities/cart';
+import { IQOrders } from '@/entities/cart';
 
-export const increaseItem = ( cart: CartsDTO, optionID: string ) => {
-  return [ ...cart ].map( option => option.id === optionID ? { ...option, quantity: option.quantity + 1 } : option );
+export const increaseItem = ( orders: IQOrders, id: string ) => {
+  return [ ...orders ].map( order => order.option === id ? { ...order, quantity: order.quantity + 1 } : order );
 };

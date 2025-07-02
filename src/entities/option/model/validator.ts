@@ -1,5 +1,9 @@
-import { OptionsSchema } from './schema';
+import z from 'zod';
+
+import { Success } from '@/shared/schema';
+
+import { Option } from './schema';
 
 export const validateOptionsData = ( data: unknown ) => {
-  return OptionsSchema.parse( data );
+  return Success.extend( { docs: z.array( Option ) } ).parse( data );
 };

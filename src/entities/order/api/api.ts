@@ -1,7 +1,9 @@
 import { defaultInstance } from '@/shared/api';
 
-export const createOrder = async (  ) => {
-  const response = await defaultInstance( 'orders', { method: 'post', body: JSON.stringify( {} ) } );
+import { IQOrder } from '../model/type';
+
+export const createOrder = async ( order: IQOrder ) => {
+  const response = await defaultInstance( 'orders', { method: 'post', body: JSON.stringify( order ) } );
   return await response.json();
 };
 

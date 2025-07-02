@@ -1,40 +1,24 @@
 import z from 'zod';
 
-import { OptionSchema } from '@/entities/option';
-import { SuccessDTO } from '@/shared/model/schemas';
+import { Option } from '@/entities/option';
+import { Address, Order as OrderBase } from '@/shared/schema';
 
-const BaseOption = z.object( {
-  quantity: z.number(),
-  price: z.number()
-} );
-
-const BaseDTO = z.object( {
+const Base = z.object( {
+  id: z.string().optional(),
   user: z.string().optional(),
   status: z.string(),
-  address: z.object( {
-    country: z.string(),
-    region: z.string(),
-    city: z.string(),
-    street: z.string()
-  } )
+  address: Address
 } );
 
-export const OrderDTO = BaseDTO.extend( {
-  products: z.array(
-    BaseOption.extend( {
-      option: z.string()
-    } )
-  )
+export const QOrder = Base.extend( {
+  options: z.array( OrderBase.extend( { price: z.number() } ) )
 } );
 
-export const OrderSchema = BaseDTO.extend( {
-  products: z.array(
-    BaseOption.extend( {
-      option: OptionSchema
-    } )
-  )
+export const Order = Base.extend( {
+  options: z.array( OrderBase.extend( { price: z.number(), option: Option } ) )
 } );
 
-export const OrdersSchema = SuccessDTO.extend( {
-  docs: z.array( OrderSchema )
+export const COrder = z.object( {
+  doc: Order,
+  message: z.string()
 } );

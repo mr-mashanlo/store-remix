@@ -1,5 +1,9 @@
-import { CartOptionsSchema } from './schema';
+import z from 'zod';
 
-export const validateCartOptionsData = ( data: unknown ) => {
-  return CartOptionsSchema.parse( data );
-};
+import { Success } from '@/shared/schema';
+
+import { Order } from './schema';
+
+export const validateOrdersData = ( data: unknown ) => {
+  return Success.extend( { docs: z.array( Order ) } ).parse( data );
+};;

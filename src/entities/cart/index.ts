@@ -1,6 +1,7 @@
-import { CartsDTO } from './model/type';
-import { validateCartOptionsData } from './model/validator';
+import { IQOrders } from './model/type';
+import { validateOrdersData } from './model/validator';
 
-export { validateCartOptionsData };
-
-export type { CartsDTO };
+export {
+  type IQOrders,
+  validateOrdersData
+};

@@ -3,12 +3,13 @@ import { HTTPError } from 'ky';
 import { ZodError } from 'zod';
 
 import { signIn } from '@/entities/auth';
-import { validateAuthFormData } from '@/shared/model/schemas';
+
+import { validateQAuthData } from './validator';
 
 const action = async ( { request }: ActionFunctionArgs ) => {
   try {
     const form = await request.formData();
-    const body = validateAuthFormData( { email: form.get( 'email' ), password: form.get( 'password' ) } );
+    const body = validateQAuthData( { email: form.get( 'email' ), password: form.get( 'password' ) } );
     const response = await signIn( request, body );
     return redirect( '/', { headers: { 'Set-Cookie': response.headers.get( 'set-cookie' ) || '' } } );
   } catch ( error ) {

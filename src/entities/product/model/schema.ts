@@ -1,19 +1,15 @@
 import { z } from 'zod';
 
-import { CategorySchema } from '@/entities/category';
-import { OptionSchema } from '@/entities/option';
-import { ImageSchema, SuccessDTO } from '@/shared/model/schemas';
+import { Category } from '@/entities/category';
+import { Option } from '@/entities/option';
+import { Image } from '@/shared/schema';
 
-export const ProductSchema = z.object( {
+export const Product = z.object( {
   id: z.string(),
   name: z.string(),
   excerpt: z.string(),
   description: z.string(),
-  categories: z.array( CategorySchema ),
-  images: z.array( ImageSchema ),
-  options: z.array( OptionSchema )
-} );
-
-export const ProductsSchema = SuccessDTO.extend( {
-  docs: z.array( ProductSchema )
+  categories: z.array( Category ),
+  images: z.array( Image ),
+  options: z.array( Option )
 } );

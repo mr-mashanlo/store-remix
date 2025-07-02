@@ -1,5 +1,5 @@
-import { AuthSchema } from './schema';
+import { Auth } from './schema';
 
 export const validateAuthData = ( data: unknown ) => {
-  return AuthSchema.safeParse( data );
+  return Auth.safeParse( data );
 };

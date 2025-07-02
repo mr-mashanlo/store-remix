@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const SuccessDTO = z.object( {
+export const Success = z.object( {
   totalDocs: z.number(),
   limit: z.number(),
   totalPages: z.number(),

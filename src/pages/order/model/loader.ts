@@ -2,14 +2,12 @@ import { data, LoaderFunctionArgs } from '@remix-run/node';
 import { HTTPError } from 'ky';
 import { ZodError } from 'zod';
 
-import { getProducts, validateProductsData } from '@/entities/product';
+import { getOrder, validateOrderData } from '@/entities/order';
 
-const loader = async ( { request }: LoaderFunctionArgs ) => {
+const loader = async ( { params }: LoaderFunctionArgs ) => {
   try {
-    const url = new URL( request.url );
-    const search = url.searchParams.get( 'search' );
-    const response = await getProducts( { 'where[name][like]': search || '' } );
-    const result = validateProductsData( response );
+    const response = await getOrder( params.id || '' );
+    const result = validateOrderData( response );
     return data( result );
   } catch ( error ) {
     if ( error instanceof ZodError ) {

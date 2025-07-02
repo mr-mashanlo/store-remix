@@ -1,8 +1,8 @@
-import { CartsDTO } from '@/entities/cart';
+import { IQOrders } from '@/entities/cart';
 
-export const addToCart = ( cart: CartsDTO, optionID: string ) => {
-  const option = cart.find( option => option.id === optionID );
-  const options = cart.filter( option => option.id !== optionID );
-  if ( option ) return [ ...options, { id: option.id, quantity: option.quantity + 1 } ];
-  return [ ...cart, { id: optionID, quantity: 1 } ];
+export const addToCart = ( orders: IQOrders, id: string ) => {
+  const option = orders.find( order => order.option === id );
+  const options = orders.filter( order => order.option !== id );
+  if ( option ) return [ ...options, { ...option, quantity: option.quantity + 1 } ];
+  return [ ...orders, { option: id, quantity: 1 } ];
 };

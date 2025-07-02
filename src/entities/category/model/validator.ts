@@ -1,9 +1,13 @@
-import { CategoriesSchema, CategorySchema } from './schema';
+import z from 'zod';
+
+import { Success } from '@/shared/schema';
+
+import { Category } from './schema';
 
 export const validateCategoryData = ( data: unknown ) => {
-  return CategorySchema.parse( data );
+  return Category.parse( data );
 };
 
 export const validateCategoriesData = ( data: unknown ) => {
-  return CategoriesSchema.parse( data );
+  return Success.extend( { docs: z.array( Category ) } ).parse( data );
 };

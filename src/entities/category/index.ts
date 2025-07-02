@@ -1,9 +1,9 @@
 import { getCategories, getCategory } from './api/api';
-import { CategorySchema } from './model/schema';
+import { Category } from './model/schema';
 import { validateCategoriesData, validateCategoryData } from './model/validator';
 
 export {
-  CategorySchema,
+  Category,
   getCategories,
   getCategory,
   validateCategoriesData,

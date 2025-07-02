@@ -1,5 +1,5 @@
 import z from 'zod';
 
-import { CartsDTO } from './schema';
+import { QOrders } from './schema';
 
-export type CartsDTO = z.infer<typeof CartsDTO>;
+export type IQOrders = z.infer<typeof QOrders>;

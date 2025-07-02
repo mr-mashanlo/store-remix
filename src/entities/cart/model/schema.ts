@@ -1,19 +1,8 @@
 import z from 'zod';
 
-import { OptionSchema } from '@/entities/option';
-import { SuccessDTO } from '@/shared/model/schemas';
+import { Option } from '@/entities/option';
+import { Order as OrderBase } from '@/shared/schema';
 
-export const CartDTO = z.object( {
-  id: z.string(),
-  quantity: z.number()
-} );
+export const QOrders = z.array( OrderBase );
 
-export const CartsDTO = z.array( CartDTO );
-
-export const CartOptionSchema = OptionSchema.extend( {
-  quantity: z.number()
-} );
-
-export const CartOptionsSchema = SuccessDTO.extend( {
-  docs: z.array( CartOptionSchema )
-} );
+export const Order = OrderBase.extend( { option: Option } );
